@@ -1,0 +1,9 @@
+/* Minimal custom styles to complement Materialize */
+body { display: flex; flex-direction: column; min-height: 100vh; }
+main.container { flex: 1 0 auto; }
+.muted { color: #666; }
+pre, code { background: #f5f5f5; padding: 2px 4px; border-radius: 3px; }
+
+@media (max-width: 600px) {
+  .brand-logo { font-size: 1rem; }
+}
