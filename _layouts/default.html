@@ -15,30 +15,33 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <header style="display: flex; align-items: flex-start; min-height: 220px;">
+  <div class="wrapper" style="width: auto;">
+    <header style="color: blueviolet;">
       <div id="sidebar-header-container">
-        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="amsharm2" data-version="v1">
-          <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/amsharm2?trk=profile-badge"></a>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid #fefbfb; margin: 16px 0; width: 100%; max-width: inherit; box-sizing: border-box;">
-
         <!-- Collapsible Sidebar menu for projects -->
         <nav id="sidebar-menu">
-          <div class="nav-home" style="margin-bottom:10px;"><a href="{{ '/' | relative_url }}"><h2>Home</h2></a></div>
+          <div class="nav-home" style="margin-bottom:10px;">
+            <a href="{{ '/' | relative_url }}">
+              <h2>Amit Sharma</h2>
+            </a></div>
+          
+            <div class="nav-home" style="margin-bottom:10px;">
+              <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=amsharm2" target="_blank">
+               <h3>Follow on LinkedIn</h3>
+              </a>
+            </div>
           <h2>Projects</h2>
           <ul>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Greenlight</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
+                class="company-title">Greenlight</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="{{ '/projects/greenlight/project-1.html' | relative_url }}">Project 1</a></li>
-                <!-- <li><a href="{{ '/projects/greenlight/project-2.html' | relative_url }}">Project 2</a></li> -->
-                <!-- <li><a href="{{ '/projects/greenlight/project-3.html' | relative_url }}">Project 3</a></li> -->
               </ul>
             </li>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Blinkit</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
+                class="company-title">Blinkit</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="{{ '/projects/blinkit/project-1.html' | relative_url }}">Project 1</a></li>
                 <li><a href="{{ '/projects/blinkit/project-2.html' | relative_url }}">Project 2</a></li>
@@ -46,7 +49,8 @@
               </ul>
             </li>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Cisco Systems</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
+                class="company-title">Cisco Systems</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="{{ '/projects/cisco/project-1.html' | relative_url }}">Project 1</a></li>
                 <li><a href="{{ '/projects/cisco/project-2.html' | relative_url }}">Project 2</a></li>
@@ -54,7 +58,8 @@
               </ul>
             </li>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Infy & Infogain</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
+                class="company-title">Infy & Infogain</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="#">Project 1</a></li>
                 <li><a href="#">Project 2</a></li>
@@ -63,8 +68,8 @@
             </li>
           </ul>
         </nav>
-      </div>
-      <div style="margin-left: 30px; flex: 1;">
+      <!-- </div> -->
+      <!-- <div style="margin-left: 30px; flex: 1;"> -->
         <!-- <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
          <h1><a href="{{ "/" | absolute_url }}">Amit Sharma</a></h1> -->
 
@@ -85,31 +90,29 @@
           <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
         </ul>
         {% endif %} -->
-
       </div>
     </header>
     <section id="main-content">
       {{ content }}
-
     </section>
-    <!-- <footer id="site-footer">
+    <footer id="site-footer">
+      <!-- <hr
+          style="border: none; border-top: 1px solid #fefbfb; margin: 16px 0; width: 100%; max-width: inherit; box-sizing: border-box;"> -->
       <p><small>Hosted on GitHub Pages</small></p>
-    </footer> -->
-  </div>
+    </footer>
   </div>
   <script src="{{ "assets/js/scale.fix.js" | relative_url }}"></script>
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-  <script>
+   <script>
     // Helper: initialize sidebar toggles
     function initSidebarToggles() {
       var companySections = document.querySelectorAll('#sidebar-menu .company-section');
-      companySections.forEach(function(section) {
+      companySections.forEach(function (section) {
         var toggle = section.querySelector('.company-toggle');
         var content = section.querySelector('.company-projects');
         // ensure default state
         if (!content) return;
         if (!content.style.display) content.style.display = 'none';
-        toggle.onclick = function(e) {
+        toggle.onclick = function (e) {
           if (content.style.display === 'none') {
             content.style.display = 'block';
             toggle.textContent = '[-]';
@@ -124,7 +127,7 @@
     // Helper: execute inline scripts found in fetched fragment
     function runInlineScripts(container) {
       var scripts = container.querySelectorAll('script');
-      scripts.forEach(function(oldScript) {
+      scripts.forEach(function (oldScript) {
         var script = document.createElement('script');
         if (oldScript.src) {
           // External script: load by adding src
@@ -148,11 +151,11 @@
       }
 
       fetch(absolute, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
-        .then(function(response) {
+        .then(function (response) {
           if (!response.ok) throw new Error('Network response not ok');
           return response.text();
         })
-        .then(function(htmlText) {
+        .then(function (htmlText) {
           var parser = new DOMParser();
           var doc = parser.parseFromString(htmlText, 'text/html');
           var newSection = doc.querySelector('section');
@@ -190,7 +193,7 @@
           // Update browser URL (pushState)
           if (pushState) history.pushState({ url: absolute }, '', absolute);
         })
-        .catch(function() {
+        .catch(function () {
           // on error, fall back to full navigation
           window.location.href = absolute;
         });
@@ -200,7 +203,7 @@
     function initAjaxNav() {
       var sidebar = document.getElementById('sidebar-menu');
       if (!sidebar) return;
-      sidebar.addEventListener('click', function(e) {
+      sidebar.addEventListener('click', function (e) {
         var target = e.target;
         // Walk up to <a> if click on child
         while (target && target !== sidebar && target.nodeName !== 'A') target = target.parentNode;
@@ -226,13 +229,13 @@
     }
 
     // Handle back/forward
-    window.addEventListener('popstate', function(event) {
+    window.addEventListener('popstate', function (event) {
       var url = (event.state && event.state.url) ? event.state.url : location.href;
       loadFragment(url, false);
     });
 
     // Initialize on DOM ready
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       initSidebarToggles();
       initAjaxNav();
     });

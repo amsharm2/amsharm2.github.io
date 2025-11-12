@@ -8,7 +8,7 @@ gem "jekyll-theme-minimal"
 
 # This gem is required for GitHub Pages
 group :jekyll_plugins do
-  gem "jekyll-feed"
+  # gem "jekyll-feed"
   # Add other plugins here if you use them
 end
 
