@@ -26,34 +26,35 @@
 
         <!-- Collapsible Sidebar menu for projects -->
         <nav id="sidebar-menu">
+          <div class="nav-home" style="margin-bottom:10px;"><a href="{{ '/' | relative_url }}"><h2>Home</h2></a></div>
           <h2>Projects</h2>
           <ul>
             <li class="company-section">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Greenlight</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
-                <li><a href="#">Project 1</a></li>
-                <li><a href="#">Project 2</a></li>
-                <li><a href="#">Project 3</a></li>
+                <li><a href="{{ '/projects/greenlight/project-1.html' | relative_url }}">Project 1</a></li>
+                <!-- <li><a href="{{ '/projects/greenlight/project-2.html' | relative_url }}">Project 2</a></li> -->
+                <!-- <li><a href="{{ '/projects/greenlight/project-3.html' | relative_url }}">Project 3</a></li> -->
               </ul>
             </li>
             <li class="company-section">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Blinkit</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
-                <li><a href="#">Project 1</a></li>
-                <li><a href="#">Project 2</a></li>
-                <li><a href="#">Project 3</a></li>
+                <li><a href="{{ '/projects/blinkit/project-1.html' | relative_url }}">Project 1</a></li>
+                <li><a href="{{ '/projects/blinkit/project-2.html' | relative_url }}">Project 2</a></li>
+                <li><a href="{{ '/projects/blinkit/project-3.html' | relative_url }}">Project 3</a></li>
               </ul>
             </li>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Cisco</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Cisco Systems</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
-                <li><a href="#">Project 1</a></li>
-                <li><a href="#">Project 2</a></li>
-                <li><a href="#">Project 3</a></li>
+                <li><a href="{{ '/projects/cisco/project-1.html' | relative_url }}">Project 1</a></li>
+                <li><a href="{{ '/projects/cisco/project-2.html' | relative_url }}">Project 2</a></li>
+                <li><a href="{{ '/projects/cisco/project-3.html' | relative_url }}">Project 3</a></li>
               </ul>
             </li>
             <li class="company-section">
-              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Early Career</span>
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Infy & Infogain</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="#">Project 1</a></li>
                 <li><a href="#">Project 2</a></li>
@@ -87,7 +88,7 @@
 
       </div>
     </header>
-    <section>
+    <section id="main-content">
       {{ content }}
 
     </section>
@@ -99,13 +100,16 @@
   <script src="{{ "assets/js/scale.fix.js" | relative_url }}"></script>
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
   <script>
-    // Collapsible menu for each company with plus/minus toggle
-    document.addEventListener('DOMContentLoaded', function() {
+    // Helper: initialize sidebar toggles
+    function initSidebarToggles() {
       var companySections = document.querySelectorAll('#sidebar-menu .company-section');
       companySections.forEach(function(section) {
         var toggle = section.querySelector('.company-toggle');
         var content = section.querySelector('.company-projects');
-        toggle.addEventListener('click', function() {
+        // ensure default state
+        if (!content) return;
+        if (!content.style.display) content.style.display = 'none';
+        toggle.onclick = function(e) {
           if (content.style.display === 'none') {
             content.style.display = 'block';
             toggle.textContent = '[-]';
@@ -113,8 +117,124 @@
             content.style.display = 'none';
             toggle.textContent = '[+]';
           }
-        });
+        };
       });
+    }
+
+    // Helper: execute inline scripts found in fetched fragment
+    function runInlineScripts(container) {
+      var scripts = container.querySelectorAll('script');
+      scripts.forEach(function(oldScript) {
+        var script = document.createElement('script');
+        if (oldScript.src) {
+          // External script: load by adding src
+          script.src = oldScript.src;
+        } else {
+          script.textContent = oldScript.textContent;
+        }
+        document.body.appendChild(script).parentNode.removeChild(script);
+      });
+    }
+
+    // Load a page fragment and replace #main-content with the fetched page's <section>
+    function loadFragment(url, pushState = true) {
+      // Normalize URL to same-origin absolute
+      try {
+        var absolute = new URL(url, location.href).href;
+      } catch (e) {
+        // If URL is malformed, fallback to full navigation
+        window.location.href = url;
+        return;
+      }
+
+      fetch(absolute, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(function(response) {
+          if (!response.ok) throw new Error('Network response not ok');
+          return response.text();
+        })
+        .then(function(htmlText) {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(htmlText, 'text/html');
+          var newSection = doc.querySelector('section');
+          if (!newSection) {
+            // no fragment found, fallback to full navigation
+            window.location.href = absolute;
+            return;
+          }
+
+          var main = document.getElementById('main-content');
+          if (!main) {
+            window.location.href = absolute; // should not happen
+            return;
+          }
+
+          // Replace content
+          main.innerHTML = newSection.innerHTML;
+
+          // Update document title (prefer <title>, fallback to first h1)
+          var newTitle = doc.querySelector('title');
+          if (newTitle && newTitle.textContent) {
+            document.title = newTitle.textContent;
+          } else {
+            var h1 = main.querySelector('h1');
+            if (h1) document.title = h1.textContent + ' — ' + (document.title || '');
+          }
+
+          // Run inline scripts inside the fetched section (if any)
+          runInlineScripts(main);
+
+          // Re-initialize any bindings inside page (if needed)
+          // For now, re-run sidebar toggles so toggles remain functional
+          initSidebarToggles();
+
+          // Update browser URL (pushState)
+          if (pushState) history.pushState({ url: absolute }, '', absolute);
+        })
+        .catch(function() {
+          // on error, fall back to full navigation
+          window.location.href = absolute;
+        });
+    }
+
+    // Intercept clicks on sidebar project links to load only the content fragment
+    function initAjaxNav() {
+      var sidebar = document.getElementById('sidebar-menu');
+      if (!sidebar) return;
+      sidebar.addEventListener('click', function(e) {
+        var target = e.target;
+        // Walk up to <a> if click on child
+        while (target && target !== sidebar && target.nodeName !== 'A') target = target.parentNode;
+        if (!target || target.nodeName !== 'A') return;
+
+        // Only intercept same-origin, same-site links
+        var href = target.getAttribute('href');
+        if (!href) return;
+        // Allow anchors and external links normally
+        if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        var dest;
+        try {
+          dest = new URL(href, location.href);
+        } catch (err) {
+          return; // malformed
+        }
+        if (dest.origin !== location.origin) return; // external
+
+        // Intercept
+        e.preventDefault();
+        loadFragment(dest.href, true);
+      });
+    }
+
+    // Handle back/forward
+    window.addEventListener('popstate', function(event) {
+      var url = (event.state && event.state.url) ? event.state.url : location.href;
+      loadFragment(url, false);
+    });
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      initSidebarToggles();
+      initAjaxNav();
     });
   </script>
 </body>
