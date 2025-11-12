@@ -16,48 +16,54 @@
 
 <body>
   <div class="wrapper">
-    <header style="display: flex;">
+    <header style="display: flex; align-items: flex-start; min-height: 220px;">
+      <div id="sidebar-header-container">
+        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="amsharm2" data-version="v1">
+          <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/amsharm2?trk=profile-badge"></a>
+        </div>
 
-      <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="amsharm2" data-version="v1">
-        <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/amsharm2?trk=profile-badge"></a>
+        <hr style="border: none; border-top: 1px solid #fefbfb; margin: 16px 0; width: 100%; max-width: inherit; box-sizing: border-box;">
+
+        <!-- Collapsible Sidebar menu for projects -->
+        <nav id="sidebar-menu">
+          <h2>Projects</h2>
+          <ul>
+            <li class="company-section">
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Greenlight</span>
+              <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
+                <li><a href="#">Project 1</a></li>
+                <li><a href="#">Project 2</a></li>
+                <li><a href="#">Project 3</a></li>
+              </ul>
+            </li>
+            <li class="company-section">
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Blinkit</span>
+              <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
+                <li><a href="#">Project 1</a></li>
+                <li><a href="#">Project 2</a></li>
+                <li><a href="#">Project 3</a></li>
+              </ul>
+            </li>
+            <li class="company-section">
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Cisco</span>
+              <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
+                <li><a href="#">Project 1</a></li>
+                <li><a href="#">Project 2</a></li>
+                <li><a href="#">Project 3</a></li>
+              </ul>
+            </li>
+            <li class="company-section">
+              <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span class="company-title">Early Career</span>
+              <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
+                <li><a href="#">Project 1</a></li>
+                <li><a href="#">Project 2</a></li>
+                <li><a href="#">Project 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
       </div>
-
-      <!-- Sidebar menu for projects -->
-      <nav id="sidebar-menu"
-        style="min-width: 220px; background: #f4f4f4; padding: 20px; border-right: 1px solid #ddd;">
-        <h2>Projects</h2>
-        <ul style="list-style: none; padding-left: 0;">
-          <li><strong>Company 1</strong>
-            <ul style="list-style: disc; margin-left: 20px;">
-              <li><a href="#">Project 1</a></li>
-              <li><a href="#">Project 2</a></li>
-              <li><a href="#">Project 3</a></li>
-            </ul>
-          </li>
-          <li><strong>Company 2</strong>
-            <ul style="list-style: disc; margin-left: 20px;">
-              <li><a href="#">Project 1</a></li>
-              <li><a href="#">Project 2</a></li>
-              <li><a href="#">Project 3</a></li>
-            </ul>
-          </li>
-          <li><strong>Company 3</strong>
-            <ul style="list-style: disc; margin-left: 20px;">
-              <li><a href="#">Project 1</a></li>
-              <li><a href="#">Project 2</a></li>
-              <li><a href="#">Project 3</a></li>
-            </ul>
-          </li>
-          <li><strong>Company 4</strong>
-            <ul style="list-style: disc; margin-left: 20px;">
-              <li><a href="#">Project 1</a></li>
-              <li><a href="#">Project 2</a></li>
-              <li><a href="#">Project 3</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <div style="flex: 1; padding-left: 30px;">
+      <div style="margin-left: 30px; flex: 1;">
         <!-- <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
          <h1><a href="{{ "/" | absolute_url }}">Amit Sharma</a></h1> -->
 
@@ -70,11 +76,6 @@
         {% if site.github.is_project_page %}
         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
         {% endif %} -->
-
-
-        {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
 
         <!-- {% if site.show_downloads %}
         <ul class="downloads">
@@ -90,16 +91,32 @@
       {{ content }}
 
     </section>
-    <footer>
-      <!-- {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %} -->
-      <!-- <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p> -->
+    <!-- <footer id="site-footer">
       <p><small>Hosted on GitHub Pages</small></p>
-    </footer>
+    </footer> -->
+  </div>
   </div>
   <script src="{{ "assets/js/scale.fix.js" | relative_url }}"></script>
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <script>
+    // Collapsible menu for each company with plus/minus toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      var companySections = document.querySelectorAll('#sidebar-menu .company-section');
+      companySections.forEach(function(section) {
+        var toggle = section.querySelector('.company-toggle');
+        var content = section.querySelector('.company-projects');
+        toggle.addEventListener('click', function() {
+          if (content.style.display === 'none') {
+            content.style.display = 'block';
+            toggle.textContent = '[-]';
+          } else {
+            content.style.display = 'none';
+            toggle.textContent = '[+]';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
