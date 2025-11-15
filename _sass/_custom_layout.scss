@@ -1,13 +1,24 @@
 /* Define the two-column container */
 .wrapper {
     display: flex;         /* Use Flexbox for layout */
-    // flex-wrap: nowrap;
-    // width: 100%;
-    // padding: 1%;
-    flex-flow: row wrap;
-    justify-content: space-around;
+        // flex-wrap: nowrap;
+        // width: 100%;
+        // padding: 1%;
+        flex-flow: row wrap;
+        justify-content: flex-start;
     padding: 0;
     margin-top: 0px;
+}
+
+/* Use border-box so padding doesn't add to element width and avoid overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Prevent small horizontal scroll by disallowing x overflow on root */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
