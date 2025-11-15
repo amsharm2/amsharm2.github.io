@@ -1,0 +1,99 @@
+/* Define the two-column container */
+.wrapper {
+    display: flex;         /* Use Flexbox for layout */
+    // flex-wrap: nowrap;
+    // width: 100%;
+    // padding: 1%;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin-top: 0px;
+}
+
+
+.header-content {
+   /* Styles for the single horizontal box */
+  background-color: #F8F7F3;
+  padding: 0px;
+  width: 100%;
+  margin-bottom: 5px; /* Space between header and columns */
+  margin-top: 0px;
+  display: flex;
+//   position: fixed;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure header stays on top */
+}
+
+.header-content-1 {
+    padding-left: 10px;
+    // background-color: red;
+    margin-top: 10px;
+    width: 50%;
+    margin-bottom: 0;
+    padding-top: 10px;
+    text-align: left;
+    justify-content: center;
+}
+
+.header-content-2 {
+    padding-right: 10px;
+    // background-color: blue;
+    padding-top: 10px;
+    margin-top: 10px;
+    width: 50%;
+    margin-bottom: 0;
+    text-align: right;
+    justify-content: center;
+}
+
+/* ------------------------------------- */
+/* Desktop/Tablet Styles (Default)       */
+/* ------------------------------------- */
+
+.menu-navigation {
+    /* Fixed width for the menu */
+    width: 30%;
+    /* Prevent shrinking/growing */
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 0%;
+    padding-left: 10px;
+}
+
+.main-content-variable {
+    /* Use remaining space */
+    flex-grow: 1;
+    padding: 0%;
+    width: 68%;
+    /* Enable scrolling only within this container */
+    height: calc(100vh - 100px); /* Adjust based on header height */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.main-content {
+    padding-top: 10px;
+}
+
+
+/* ------------------------------------- */
+/* Mobile Styles (Screen less than 600px)*/
+/* ------------------------------------- */
+
+@media (max-width: 600px) {
+    .wrapper {
+        flex-direction: column; /* Stack columns vertically on mobile */
+        flex-wrap: wrap;        /* Allow content to wrap */
+    }
+
+    .menu-navigation {
+        width: 100%;           /* Menu takes full width */
+        padding-right: 0;
+        margin-bottom: 20px;   /* Add space below the menu */
+    }
+
+    .main-content-variable {
+        width: 100%;           /* Content takes full width */
+        padding-left: 0;
+    }
+}

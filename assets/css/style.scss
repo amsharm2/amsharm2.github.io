@@ -1,0 +1,32 @@
+---
+---
+// assets/css/style.scsss
+
+// 2. Import your custom layout styles
+@import "custom_layout";
+
+// 3. Import the remote theme's main stylesheet
+@import "jekyll-theme-minimal";
+
+
+.main-content-variable {
+    // background-color:turquoise;
+    text-align: left;
+}
+
+// .wrapper {
+//     background-color: beige;
+//     // margin-left: 10px;
+//     // margin-right: 10px;
+// }
+
+// .menu-navigation {
+//     // background-color: skyblue
+// }
+
+body{
+    // background-color: lightgrey;
+    padding:0%;
+    width: 100%;
+}
+

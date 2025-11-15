@@ -12,34 +12,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
   {% include head-custom.html %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-  <div class="wrapper" style="width: auto;">
-    <header style="color: blueviolet;">
+  <div class="wrapper">
+    <div class="header-content">
+        <!-- Content for the horizontal box -->
+        <div class="header-content-1">
+          <a href="{{ '/' | relative_url }}"> <h2>Amit Sharma</h2> </a>
+        </div>
+        <div class="header-content-2">
+          <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=amsharm2" target="_blank" class="link link-linkedin">
+              <i class="fab fa-linkedin fa-lg"></i> 
+          </a>
+
+          <a href="mailto:amit4.sharma@gmail.com " class="link link-email">
+              <i class="fas fa-envelope fa-lg"></i> 
+          </a>
+
+          <a href="https://github.com/amsharm2" target="_blank" class="link link-github">
+              <i class="fab fa-github fa-lg"></i> 
+          </a>
+        </div>
+    </div>
+    <div class="menu-navigation">
       <div id="sidebar-header-container">
         <!-- Collapsible Sidebar menu for projects -->
         <nav id="sidebar-menu">
-          <div class="nav-home" style="margin-bottom:10px;">
-            <a href="{{ '/' | relative_url }}">
-              <h2>Amit Sharma</h2>
-            </a></div>
-          
-            <div class="nav-home" style="margin-bottom:10px;">
-              <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=amsharm2" target="_blank">
-               <h3>Follow on LinkedIn</h3>
-              </a>
-            </div>
-          <h2>Projects</h2>
+          <div class="nav-home" style="margin-top:10px;">
+            <h3>Projects</h3>
+          </div>
           <ul>
-            <li class="company-section">
+            <li class="company-section" data-company="greenlight">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Greenlight</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
                 <li><a href="{{ '/projects/greenlight/project-1.html' | relative_url }}">Project 1</a></li>
               </ul>
             </li>
-            <li class="company-section">
+            <li class="company-section" data-company="blinkit">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Blinkit</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
@@ -48,7 +60,7 @@
                 <li><a href="{{ '/projects/blinkit/project-3.html' | relative_url }}">Project 3</a></li>
               </ul>
             </li>
-            <li class="company-section">
+            <li class="company-section" data-company="cisco">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Cisco Systems</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
@@ -57,7 +69,7 @@
                 <li><a href="{{ '/projects/cisco/project-3.html' | relative_url }}">Project 3</a></li>
               </ul>
             </li>
-            <li class="company-section">
+            <li class="company-section" data-company="infy-infogain">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Infy & Infogain</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
@@ -91,34 +103,75 @@
         </ul>
         {% endif %} -->
       </div>
-    </header>
-    <section id="main-content" style="text-align: justify;  width: 1100px; float: right; padding-bottom:10px;">
-      {{ content }}
-    </section>
-    <footer id="site-footer">
-      <!-- <hr
-          style="border: none; border-top: 1px solid #fefbfb; margin: 16px 0; width: 100%; max-width: inherit; box-sizing: border-box;"> -->
-      <p><small>Hosted on GitHub Pages</small></p>
-    </footer>
+    </div>
+
+    <div class="main-content-variable">
+      <div class="main-content"> 
+        {{ content }}
+      </div>
+    </div>
+
+    <!-- <footer id="site-footer">
+      <hr
+          style="border: none; border-top: 1px solid #fefbfb; margin: 16px 0; width: 100%; max-width: inherit; box-sizing: border-box;">
+      <p><small>Hosted on GitHub Pages</small>
+    </footer> -->
   </div>
   <script src="{{ "assets/js/scale.fix.js" | relative_url }}"></script>
    <script>
     // Helper: initialize sidebar toggles
     function initSidebarToggles() {
+      // Persist open/closed state in sessionStorage so AJAX navigation doesn't reset UI.
+      var STORAGE_KEY = 'sidebarOpenCompanies';
+
+      function readState() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+      }
+
+      function writeState(arr) {
+        try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch (e) {}
+      }
+
+      function isOpen(arr, name) { return arr.indexOf(name) !== -1; }
+
+      var state = readState();
+
       var companySections = document.querySelectorAll('#sidebar-menu .company-section');
       companySections.forEach(function (section) {
         var toggle = section.querySelector('.company-toggle');
         var content = section.querySelector('.company-projects');
-        // ensure default state
-        if (!content) return;
-        if (!content.style.display) content.style.display = 'none';
+        var name = section.getAttribute('data-company') || section.querySelector('.company-title') && section.querySelector('.company-title').textContent.trim();
+        if (!content || !toggle) return;
+
+        // Initialize based on persisted state if present; otherwise use current inline style or default to collapsed
+        if (name && isOpen(state, name)) {
+          content.style.display = 'block';
+          toggle.textContent = '[-]';
+        } else {
+          // If the element already has an explicit inline display, respect it; otherwise collapse
+          if (!content.style.display) content.style.display = 'none';
+          toggle.textContent = (content.style.display === 'none') ? '[+]' : '[-]';
+        }
+
         toggle.onclick = function (e) {
-          if (content.style.display === 'none') {
-            content.style.display = 'block';
-            toggle.textContent = '[-]';
-          } else {
-            content.style.display = 'none';
-            toggle.textContent = '[+]';
+          // toggle visibility
+          var open = content.style.display !== 'block';
+          content.style.display = open ? 'block' : 'none';
+          toggle.textContent = open ? '[-]' : '[+]';
+
+          // update state
+          if (name) {
+            state = readState();
+            if (open) {
+              if (!isOpen(state, name)) state.push(name);
+            } else {
+              var idx = state.indexOf(name);
+              if (idx !== -1) state.splice(idx, 1);
+            }
+            writeState(state);
           }
         };
       });
@@ -158,15 +211,18 @@
         .then(function (htmlText) {
           var parser = new DOMParser();
           var doc = parser.parseFromString(htmlText, 'text/html');
-          var newSection = doc.querySelector('section');
+          // Try to find a sensible content container in the fetched document.
+          // Some pages use a <section>, others (this site) use .main-content-variable / .main-content.
+          var newSection = doc.querySelector('section') || doc.querySelector('.main-content-variable') || doc.querySelector('.main-content');
           if (!newSection) {
             // no fragment found, fallback to full navigation
             window.location.href = absolute;
             return;
           }
 
-          var main = document.getElementById('main-content');
+          var main = document.querySelector('.main-content-variable') || document.querySelector('.main-content') || document.getElementById('main-content');
           if (!main) {
+            // unable to locate container on this page, fallback to full navigation
             window.location.href = absolute; // should not happen
             return;
           }
