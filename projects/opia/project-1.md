@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Greenlight — Project 3"
+title: "Greenlight — Project 1"
 ---
 
-# Project: Project 3
+# Project: Project 1
 
 ## Impact
 
@@ -16,3 +16,5 @@ List the main technologies, tools, frameworks and languages used.
 ## Experience working on this
 
 Write a few sentences about your role, challenges, learnings and results.
+
+<!-- Add more sections or images as you like -->

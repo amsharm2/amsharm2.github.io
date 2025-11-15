@@ -60,6 +60,11 @@
     padding-left: 10px;
 }
 
+.menu-navigation ul ul {
+    margin: 0;      /* Removes default margins (top, bottom, left, right) */
+    padding: 0;     /* Removes default padding */
+}
+
 .main-content-variable {
     /* Use remaining space */
     flex-grow: 1;
