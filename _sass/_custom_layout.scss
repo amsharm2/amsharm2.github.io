@@ -31,7 +31,7 @@ html, body {
   margin-top: 0px;
   display: flex;
 //   position: fixed;
-//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensure header stays on top */
 }
 
@@ -47,7 +47,7 @@ html, body {
 }
 
 .header-content-2 {
-    padding-right: 10px;
+    padding-right: 30px;
     // background-color: blue;
     padding-top: 10px;
     margin-top: 10px;
@@ -85,6 +85,12 @@ html, body {
     height: calc(100vh - 100px); /* Adjust based on header height */
     overflow-y: auto;
     overflow-x: hidden;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none; /* Firefox */
+}
+
+.main-content-variable::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .main-content {
