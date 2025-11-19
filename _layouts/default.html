@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {% seo %}
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; font-src 'self' data: https://cdnjs.cloudflare.com;">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; font-src 'self' data: https://cdnjs.cloudflare.com;">
   <link rel="stylesheet" href="{{ "assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -19,23 +20,26 @@
 <body>
   <div class="wrapper">
     <div class="header-content">
-        <!-- Content for the horizontal box -->
-        <div class="header-content-1">
-          <a href="{{ '/' | relative_url }}"> <h2>Amit Sharma</h2> </a>
-        </div>
-        <div class="header-content-2">
-            <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=amsharm2" target="_blank" rel="noopener noreferrer" class="link link-linkedin">
-              <i class="fab fa-linkedin fa-lg"></i> 
-          </a>
+      <!-- Content for the horizontal box -->
+      <div class="header-content-1">
+        <a href="{{ '/' | relative_url }}">
+          <h2>Amit Sharma</h2>
+        </a>
+      </div>
+      <div class="header-content-2">
+        <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=amsharm2"
+          target="_blank" rel="noopener noreferrer" class="link link-linkedin">
+          <i class="fab fa-linkedin fa-lg"></i>
+        </a>
 
-          <a href="mailto:amit4.sharma@gmail.com " class="link link-email">
-              <i class="fas fa-envelope fa-lg"></i> 
-          </a>
+        <a href="mailto:amit4.sharma@gmail.com " class="link link-email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
 
-            <a href="https://github.com/amsharm2" target="_blank" rel="noopener noreferrer" class="link link-github">
-              <i class="fab fa-github fa-lg"></i> 
-          </a>
-        </div>
+        <a href="https://github.com/amsharm2" target="_blank" rel="noopener noreferrer" class="link link-github">
+          <i class="fab fa-github fa-lg"></i>
+        </a>
+      </div>
     </div>
     <div class="menu-navigation">
       <div id="sidebar-header-container">
@@ -60,6 +64,7 @@
                 <li><a href="{{ '/projects/blinkit/project-2.html' | relative_url }}">Project 2</a></li>
                 <li><a href="{{ '/projects/blinkit/project-3.html' | relative_url }}">Project 3</a></li>
               </ul>
+            </li>
             <li class="company-section" data-company="opia-la">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Opia Labs</span>
@@ -67,8 +72,8 @@
                 <li><a href="{{ '/projects/opia/project-1.html' | relative_url }}">Project 1</a></li>
               </ul>
             </li>
-                      </li>
-                 <li class="company-section" data-company="cisco">
+
+            <li class="company-section" data-company="cisco">
               <span class="company-toggle" style="cursor:pointer; font-weight:bold; margin-right:8px;">[+]</span><span
                 class="company-title">Cisco</span>
               <ul class="company-projects" style="list-style: disc; margin-left: 20px; display: none;">
@@ -88,8 +93,8 @@
             </li>
           </ul>
         </nav>
-      <!-- </div> -->
-      <!-- <div style="margin-left: 30px; flex: 1;"> -->
+        <!-- </div> -->
+        <!-- <div style="margin-left: 30px; flex: 1;"> -->
         <!-- <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
          <h1><a href="{{ "/" | absolute_url }}">Amit Sharma</a></h1> -->
 
@@ -114,7 +119,7 @@
     </div>
 
     <div class="main-content-variable">
-      <div class="main-content"> 
+      <div class="main-content">
         {{ content }}
       </div>
     </div>
