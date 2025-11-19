@@ -232,7 +232,7 @@ REQUIREMENTS:
 
 OUTPUT FORMAT:
 - HTML with embedded Liquid syntax
-- Include {% %} template tags appropriately
+- Include template tags appropriately
 - Add inline CSS comments for clarity
 ```
 
