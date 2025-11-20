@@ -37,20 +37,27 @@
       }
 
       toggle.onclick = function () {
-        var open = content.style.display !== 'block';
-        content.style.display = open ? 'block' : 'none';
-        toggle.textContent = open ? '[-]' : '[+]';
+        var willOpen = content.style.display !== 'block';
 
-        if (name) {
-          state = readState();
-          if (open) {
-            if (!isOpen(state, name)) state.push(name);
-          } else {
-            var idx = state.indexOf(name);
-            if (idx !== -1) state.splice(idx, 1);
-          }
-          writeState(state);
+        if (willOpen) {
+          companySections.forEach(function (otherSection) {
+            if (otherSection !== section) {
+              var otherContent = otherSection.querySelector('.company-projects');
+              var otherToggle = otherSection.querySelector('.company-toggle');
+              if (otherContent) otherContent.style.display = 'none';
+              if (otherToggle) otherToggle.textContent = '[+]';
+            }
+          });
         }
+
+        content.style.display = willOpen ? 'block' : 'none';
+        toggle.textContent = willOpen ? '[-]' : '[+]';
+
+        var newState = [];
+        if (willOpen && name) {
+          newState.push(name);
+        }
+        writeState(newState);
       };
     });
   }
