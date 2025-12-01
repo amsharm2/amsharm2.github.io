@@ -3,7 +3,7 @@ layout: default
 title: "Cisco — Ops+"
 ---
 
-# 💡 Ops+ Framework: Automated Incident Resolution & ITOps Transformation
+## 💡 Ops+ Framework: Automated Incident Resolution & ITOps Transformation
 
 ---
 
